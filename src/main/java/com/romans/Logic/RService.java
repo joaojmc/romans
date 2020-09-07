@@ -1,7 +1,8 @@
 package com.romans.Logic;
 
-import com.romans.Models.Emperor;
-import com.romans.Repositories.RRepository;
+import com.romans.Model.Emperor;
+import com.romans.Repository.RRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ public class RService {
 
     private final RRepository rRepository;
 
+    @Autowired
     public RService(RRepository rRepository) {
         this.rRepository = rRepository;
     }
@@ -24,7 +26,7 @@ public class RService {
     }
 
     public ResponseEntity<Emperor> findEmperorById(String id) {
-        Optional<Emperor> optionalEmperor = rRepository.findBy_id(id);
+        Optional<Emperor> optionalEmperor = rRepository.findById(id);
         return optionalEmperor
                 .map(emperor -> new ResponseEntity<>(emperor, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
@@ -35,5 +37,35 @@ public class RService {
         return optionalEmperor
                 .map(emperor -> new ResponseEntity<>(emperor, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+    }
+
+    public ResponseEntity<List<Emperor>> getEmperorAttribute(String operation) {
+        List<Emperor> emperorList = switch (operation) {
+//            // Date comparisons
+//            case "earliestDateOfBirth" -> rRepository.earliestDateOfBirth();
+//            case "latestDateOfBirth" -> rRepository.latestDateOfBirth();
+//            case "shortestLife" -> rRepository.shortestLife();
+//            case "longestLife" -> rRepository.longestLife();
+//            case "shortestReign" -> rRepository.shortestReign();
+//            case "longestReign" -> rRepository.longestReign();
+//            // People counting
+//            case "leastWives" -> rRepository.leastWives();
+//            case "mostWives" -> rRepository.mostWives();
+//            case "leastChildren" -> rRepository.leastChildren();
+//            case "mostChildren" -> rRepository.mostChildren();
+//            case "smallestArmy" -> rRepository.smallestArmy();
+//            case "biggestArmy" -> rRepository.biggestArmy();
+//            // Other
+//            case "quotes" -> rRepository.quoteNumber();
+//            case "territoryTaken" -> rRepository.territoryTaken();
+//            case "territoryLost" -> rRepository.territoryLost();
+            default -> null;
+        };
+
+        if (emperorList != null) {
+            return new ResponseEntity<>(emperorList, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 }
