@@ -4,7 +4,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,8 +16,8 @@ public class Emperor extends Person {
     // Governmental info
     @OneToMany
     private List<Emperor> successors;
-    private Date dateOfCrowning;
-    private Date dateOfAbdication;
+    private LocalDate dateOfCrowning;
+    private LocalDate dateOfAbdication;
     private String mostNotableLaw;
     // Military info
     private int maximumArmySize;
@@ -75,6 +75,14 @@ public class Emperor extends Person {
         return Objects.hash(super.hashCode(), id, successors, dateOfCrowning, dateOfAbdication, mostNotableLaw, maximumArmySize, mostNotableConflict, territoryTaken, territoryLost, biography, quotes);
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public List<Emperor> getSuccessors() {
         return successors;
     }
@@ -83,19 +91,19 @@ public class Emperor extends Person {
         this.successors = successor;
     }
 
-    public Date getDateOfCrowning() {
+    public LocalDate getDateOfCrowning() {
         return dateOfCrowning;
     }
 
-    public void setDateOfCrowning(Date dateOfCrowning) {
+    public void setDateOfCrowning(LocalDate dateOfCrowning) {
         this.dateOfCrowning = dateOfCrowning;
     }
 
-    public Date getDateOfAbdication() {
+    public LocalDate getDateOfAbdication() {
         return dateOfAbdication;
     }
 
-    public void setDateOfAbdication(Date dateOfAbdication) {
+    public void setDateOfAbdication(LocalDate dateOfAbdication) {
         this.dateOfAbdication = dateOfAbdication;
     }
 

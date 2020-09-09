@@ -3,6 +3,7 @@ package com.romans.Model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -16,10 +17,10 @@ public class Person {
     private String name;
     private Boolean adopted;
     private String birthplace;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private String causeOfDeath;
     private String placeOfDeath;
-    private Date dateOfDeath;
+    private LocalDate dateOfDeath;
     @OneToMany
     private List<Person> wives;
     @OneToMany
@@ -92,11 +93,11 @@ public class Person {
         this.birthplace = birthplace;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -116,11 +117,11 @@ public class Person {
         this.placeOfDeath = placeOfDeath;
     }
 
-    public Date getDateOfDeath() {
+    public LocalDate getDateOfDeath() {
         return dateOfDeath;
     }
 
-    public void setDateOfDeath(Date dateOfDeath) {
+    public void setDateOfDeath(LocalDate dateOfDeath) {
         this.dateOfDeath = dateOfDeath;
     }
 

@@ -35,8 +35,8 @@ public class RController {
         return rService.findEmperorByName(name);
     }
 
-    @GetMapping("/emperors/")
-    public ResponseEntity<List<Emperor>> getEmperorAttribute(@RequestParam String operation) {
+    @GetMapping("/emperor/operation/{operation}")
+    public ResponseEntity<List<Emperor>> getEmperorAttribute(@PathVariable String operation) {
         return rService.getEmperorAttribute(operation);
     }
 }

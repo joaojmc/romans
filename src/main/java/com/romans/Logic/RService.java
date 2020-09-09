@@ -7,8 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 public class RService {
@@ -20,7 +20,23 @@ public class RService {
         this.rRepository = rRepository;
     }
 
+    private void dataFiller() {
+        Calendar calendarBC = new GregorianCalendar();
+
+        Emperor caesar = new Emperor();
+        Emperor nero = new Emperor();
+        caesar.setName("Gaius Julius Caesar");
+        nero.setName("Nero Claudius Cæsar Augustus Germanicus");
+        caesar.setDateOfBirth(LocalDate.of(-99, 8, 12));
+        nero.setDateOfBirth(LocalDate.of(38, 1, 15));
+        caesar.setId(UUID.randomUUID().toString());
+        nero.setId(UUID.randomUUID().toString());
+        rRepository.save(caesar);
+        rRepository.save(nero);
+    }
+
     public ResponseEntity<List<Emperor>> findAll() {
+        // dataFiller();
         List<Emperor> emperorSet = rRepository.findAll();
         return new ResponseEntity<>(emperorSet, HttpStatus.OK);
     }
@@ -41,9 +57,9 @@ public class RService {
 
     public ResponseEntity<List<Emperor>> getEmperorAttribute(String operation) {
         List<Emperor> emperorList = switch (operation) {
-//            // Date comparisons
-//            case "earliestDateOfBirth" -> rRepository.earliestDateOfBirth();
-//            case "latestDateOfBirth" -> rRepository.latestDateOfBirth();
+            // Date comparisons
+            case "earliestDateOfBirth" -> rRepository.earliestDateOfBirth();
+            case "latestDateOfBirth" -> rRepository.latestDateOfBirth();
 //            case "shortestLife" -> rRepository.shortestLife();
 //            case "longestLife" -> rRepository.longestLife();
 //            case "shortestReign" -> rRepository.shortestReign();
