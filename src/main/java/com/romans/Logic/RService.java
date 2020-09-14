@@ -33,17 +33,6 @@ public class RService {
         nero.setId(UUID.randomUUID().toString());
         rRepository.save(caesar);
         rRepository.save(nero);
-
-        Emperor caesar2 = new Emperor();
-        Emperor nero2 = new Emperor();
-        caesar2.setName("Gaius Julius Caesar 2");
-        nero2.setName("Nero Claudius Cæsar Augustus Germanicus 2");
-        caesar2.setDateOfBirth(LocalDate.of(-99, 8, 12));
-        nero2.setDateOfBirth(LocalDate.of(38, 1, 15));
-        caesar2.setId(UUID.randomUUID().toString());
-        nero2.setId(UUID.randomUUID().toString());
-        rRepository.save(caesar2);
-        rRepository.save(nero2);
     }
 
     public ResponseEntity<List<Emperor>> findAll() {

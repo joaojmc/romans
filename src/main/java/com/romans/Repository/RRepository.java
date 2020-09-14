@@ -59,47 +59,47 @@ public interface RRepository extends JpaRepository<Emperor, String> {
             "       group by dtype, id;", nativeQuery = true)
     List<Emperor> latestDateOfBirth();
 
-    @Query(value = "SELECT *\n" +
-            "FROM romans_default_schema.person emp\n" +
-            "WHERE emp.id IN\n" +
-            "                               (SELECT empaux.id\n" +
-            "                               FROM romans_default_schema.person empaux\n" +
-            "                               WHERE (empaux.date_of_death - empaux.date_of_birth) =\n" +
-            "                                                                   (SELECT min(emperor0_.date_of_death - emperor0_.date_of_birth)\n" +
-            "                                                                    FROM romans_default_schema.person emperor0_\n" +
+    @Query(value = "SELECT *" +
+            "FROM romans_default_schema.person emp" +
+            "WHERE emp.id IN" +
+            "                               (SELECT empaux.id" +
+            "                               FROM romans_default_schema.person empaux" +
+            "                               WHERE (empaux.date_of_death - empaux.date_of_birth) =" +
+            "                                                                   (SELECT min(emperor0_.date_of_death - emperor0_.date_of_birth)" +
+            "                                                                    FROM romans_default_schema.person emperor0_" +
             "                                                                    WHERE emperor0_.dtype = 'Emperor'))", nativeQuery = true)
     List<Emperor> shortestLife();
 
-    @Query(value = "SELECT *\n" +
-            "FROM romans_default_schema.person emp\n" +
-            "WHERE emp.id IN\n" +
-            "                               (SELECT empaux.id\n" +
-            "                               FROM romans_default_schema.person empaux\n" +
-            "                               WHERE (empaux.date_of_death - empaux.date_of_birth) =\n" +
-            "                                                                   (SELECT max(emperor0_.date_of_death - emperor0_.date_of_birth)\n" +
-            "                                                                    FROM romans_default_schema.person emperor0_\n" +
+    @Query(value = "SELECT *" +
+            "FROM romans_default_schema.person emp" +
+            "WHERE emp.id IN" +
+            "                               (SELECT empaux.id" +
+            "                               FROM romans_default_schema.person empaux" +
+            "                               WHERE (empaux.date_of_death - empaux.date_of_birth) =" +
+            "                                                                   (SELECT max(emperor0_.date_of_death - emperor0_.date_of_birth)" +
+            "                                                                    FROM romans_default_schema.person emperor0_" +
             "                                                                    WHERE emperor0_.dtype = 'Emperor'))", nativeQuery = true)
     List<Emperor> longestLife();
 
-    @Query(value = "SELECT *\n" +
-            "FROM romans_default_schema.person emp\n" +
-            "WHERE emp.id IN\n" +
-            "                               (SELECT empaux.id\n" +
-            "                               FROM romans_default_schema.person empaux\n" +
-            "                               WHERE (empaux.date_of_abdication - empaux.date_of_crowning) =\n" +
-            "                                                                   (SELECT min(emperor0_.date_of_abdication - emperor0_.date_of_crowning)\n" +
-            "                                                                    FROM romans_default_schema.person emperor0_\n" +
+    @Query(value = "SELECT *" +
+            "FROM romans_default_schema.person emp" +
+            "WHERE emp.id IN" +
+            "                               (SELECT empaux.id" +
+            "                               FROM romans_default_schema.person empaux" +
+            "                               WHERE (empaux.date_of_abdication - empaux.date_of_crowning) =" +
+            "                                                                   (SELECT min(emperor0_.date_of_abdication - emperor0_.date_of_crowning)" +
+            "                                                                    FROM romans_default_schema.person emperor0_" +
             "                                                                    WHERE emperor0_.dtype = 'Emperor'))", nativeQuery = true)
     List<Emperor> shortestReign();
 
-    @Query(value = "SELECT *\n" +
-            "FROM romans_default_schema.person emp\n" +
-            "WHERE emp.id IN\n" +
-            "                               (SELECT empaux.id\n" +
-            "                               FROM romans_default_schema.person empaux\n" +
-            "                               WHERE (empaux.date_of_abdication - empaux.date_of_crowning) =\n" +
-            "                                                                   (SELECT max(emperor0_.date_of_abdication - emperor0_.date_of_crowning)\n" +
-            "                                                                    FROM romans_default_schema.person emperor0_\n" +
+    @Query(value = "SELECT *" +
+            "FROM romans_default_schema.person emp" +
+            "WHERE emp.id IN" +
+            "                               (SELECT empaux.id" +
+            "                               FROM romans_default_schema.person empaux" +
+            "                               WHERE (empaux.date_of_abdication - empaux.date_of_crowning) =" +
+            "                                                                   (SELECT max(emperor0_.date_of_abdication - emperor0_.date_of_crowning)" +
+            "                                                                    FROM romans_default_schema.person emperor0_" +
             "                                                                    WHERE emperor0_.dtype = 'Emperor'))", nativeQuery = true)
     List<Emperor> longestReign();
 }
