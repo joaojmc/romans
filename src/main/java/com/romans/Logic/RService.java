@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class RService {
@@ -21,8 +23,6 @@ public class RService {
     }
 
     private void dataFiller() {
-        Calendar calendarBC = new GregorianCalendar();
-
         Emperor caesar = new Emperor();
         Emperor nero = new Emperor();
         caesar.setName("Gaius Julius Caesar");
@@ -33,6 +33,17 @@ public class RService {
         nero.setId(UUID.randomUUID().toString());
         rRepository.save(caesar);
         rRepository.save(nero);
+
+        Emperor caesar2 = new Emperor();
+        Emperor nero2 = new Emperor();
+        caesar2.setName("Gaius Julius Caesar 2");
+        nero2.setName("Nero Claudius Cæsar Augustus Germanicus 2");
+        caesar2.setDateOfBirth(LocalDate.of(-99, 8, 12));
+        nero2.setDateOfBirth(LocalDate.of(38, 1, 15));
+        caesar2.setId(UUID.randomUUID().toString());
+        nero2.setId(UUID.randomUUID().toString());
+        rRepository.save(caesar2);
+        rRepository.save(nero2);
     }
 
     public ResponseEntity<List<Emperor>> findAll() {
@@ -60,10 +71,10 @@ public class RService {
             // Date comparisons
             case "earliestDateOfBirth" -> rRepository.earliestDateOfBirth();
             case "latestDateOfBirth" -> rRepository.latestDateOfBirth();
-//            case "shortestLife" -> rRepository.shortestLife();
-//            case "longestLife" -> rRepository.longestLife();
-//            case "shortestReign" -> rRepository.shortestReign();
-//            case "longestReign" -> rRepository.longestReign();
+            case "shortestLife" -> rRepository.shortestLife();
+            case "longestLife" -> rRepository.longestLife();
+            case "shortestReign" -> rRepository.shortestReign();
+            case "longestReign" -> rRepository.longestReign();
 //            // People counting
 //            case "leastWives" -> rRepository.leastWives();
 //            case "mostWives" -> rRepository.mostWives();

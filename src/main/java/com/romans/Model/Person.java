@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
