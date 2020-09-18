@@ -143,4 +143,43 @@ public interface EmperorRepository extends JpaRepository<Emperor, String> {
             "  and emp.dtype = 'Emperor'", nativeQuery = true)
     List<Emperor> mostWives();
 
+    @Query(value = "select *\n" +
+            "from romans_default_schema.person emp\n" +
+            "where emp.id not in (\n" +
+            "    select empaux.person_id\n" +
+            "    from romans_default_schema.person_children empaux\n" +
+            "    where empaux.children_id is not null\n" +
+            ")\n" +
+            "  and emp.dtype = 'Emperor';", nativeQuery = true)
+    List<Emperor> noChildren();
+
+    @Query(value = "select *\n" +
+            "from romans_default_schema.person emp\n" +
+            "where emp.id in (\n" +
+            "    select empaux.person_id\n" +
+            "    from romans_default_schema.person_children empaux\n" +
+            "    where (select count(empauxcomp.person_id) from romans_default_schema.person_children as empauxcomp) =\n" +
+            "          (select min(childaux.count)\n" +
+            "           from (select childaux.person_id, count(childaux.person_id)\n" +
+            "                 from romans_default_schema.person_children as childaux\n" +
+            "                 where childaux.children_id is not null\n" +
+            "                 group by childaux.person_id) as childaux)\n" +
+            ")\n" +
+            "  and emp.dtype = 'Emperor'", nativeQuery = true)
+    List<Emperor> leastChildren();
+
+    @Query(value = "select *\n" +
+            "from romans_default_schema.person emp\n" +
+            "where emp.id in (\n" +
+            "    select empaux.person_id\n" +
+            "    from romans_default_schema.person_children empaux\n" +
+            "    where (select count(empauxcomp.person_id) from romans_default_schema.person_children as empauxcomp) =\n" +
+            "          (select max(childcounter.count)\n" +
+            "           from (select childaux.person_id, count(childaux.person_id)\n" +
+            "                 from romans_default_schema.person_children as childaux\n" +
+            "                 where childaux.children_id is not null\n" +
+            "                 group by childaux.person_id) as childcounter)\n" +
+            ")\n" +
+            "  and emp.dtype = 'Emperor'", nativeQuery = true)
+    List<Emperor> mostChildren();
 }

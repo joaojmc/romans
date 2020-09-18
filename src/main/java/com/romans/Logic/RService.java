@@ -1,6 +1,7 @@
 package com.romans.Logic;
 
 import com.romans.Model.Emperor;
+import com.romans.Model.Person;
 import com.romans.Repository.EmperorRepository;
 import com.romans.Repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class RService {
@@ -42,6 +45,18 @@ public class RService {
 //        List<Person> listOfWives = new ArrayList<>();
 //        listOfWives.add(cossutia);
 //        caesar.ifPresent(emperor -> emperor.setWives(listOfWives));
+//        Person caesarGet = new Person();
+//        if (caesar.isPresent()) {
+//            caesarGet = caesar.get();
+//        }
+//        Person julia = new Person();
+//        julia.setName("Julia");
+//        julia.setId(UUID.randomUUID().toString());
+//        personRepository.save(julia);
+//        Optional<Person> caesar = personRepository.findById("343bd04e-f586-47f8-89d4-5d33f864cfd4");
+//        List<Person> listOfChildren = new ArrayList<>();
+//        listOfChildren.add(julia);
+//        caesar.ifPresent(emperor -> emperor.setChildren(listOfChildren));
 //        Person caesarGet = new Person();
 //        if (caesar.isPresent()) {
 //            caesarGet = caesar.get();
@@ -82,9 +97,9 @@ public class RService {
             case "noWives" -> emperorRepository.noWives();
             case "leastWives" -> emperorRepository.leastWives();
             case "mostWives" -> emperorRepository.mostWives();
-//            case "noChildren" -> emperorRepository.noChildren();
-//            case "leastChildren" -> emperorRepository.leastChildren();
-//            case "mostChildren" -> emperorRepository.mostChildren();
+            case "noChildren" -> emperorRepository.noChildren();
+            case "leastChildren" -> emperorRepository.leastChildren();
+            case "mostChildren" -> emperorRepository.mostChildren();
 //            case "smallestArmy" -> emperorRepository.smallestArmy();
 //            case "biggestArmy" -> emperorRepository.biggestArmy();
 //            // Other
