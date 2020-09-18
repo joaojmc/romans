@@ -68,6 +68,14 @@ public class Person {
         return Objects.hash(name, adopted, birthplace, dateOfBirth, causeOfDeath, placeOfDeath, dateOfDeath, wives, children, trustedPersons);
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
