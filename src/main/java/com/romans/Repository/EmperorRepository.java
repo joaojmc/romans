@@ -182,4 +182,60 @@ public interface EmperorRepository extends JpaRepository<Emperor, String> {
             ")\n" +
             "  and emp.dtype = 'Emperor'", nativeQuery = true)
     List<Emperor> mostChildren();
+
+    @Query(value = "select * \n" +
+            "            from romans_default_schema.person emp \n" +
+            "            where emp.id not in ( \n" +
+            "                select empaux.emperor_id\n" +
+            "                from romans_default_schema.emperor_quotes empaux\n" +
+            "                where empaux.quotes is not null\n" +
+            "            ) \n" +
+            "              and emp.dtype = 'Emperor';", nativeQuery = true)
+    List<Emperor> noQuotes();
+
+    @Query(value = "select *\n" +
+            "from romans_default_schema.person emp\n" +
+            "where emp.id in (\n" +
+            "    select empaux.emperor_id\n" +
+            "    from romans_default_schema.emperor_quotes empaux\n" +
+            "    where (select count(empauxcomp.emperor_id) from romans_default_schema.emperor_quotes as empauxcomp) =\n" +
+            "          (select min(quotecounter.count)\n" +
+            "           from (select quoteaux.emperor_id, count(quoteaux.emperor_id)\n" +
+            "                 from romans_default_schema.emperor_quotes as quoteaux\n" +
+            "                 where quoteaux.emperor_id is not null\n" +
+            "                 group by quoteaux.emperor_id) as quotecounter)\n" +
+            ")\n" +
+            "  and emp.dtype = 'Emperor'", nativeQuery = true)
+    List<Emperor> leastQuotes();
+
+    @Query(value = "select *\n" +
+            "from romans_default_schema.person emp\n" +
+            "where emp.id in (\n" +
+            "    select empaux.emperor_id\n" +
+            "    from romans_default_schema.emperor_quotes empaux\n" +
+            "    where (select count(empauxcomp.emperor_id) from romans_default_schema.emperor_quotes as empauxcomp) =\n" +
+            "          (select max(quotecounter.count)\n" +
+            "           from (select quoteaux.emperor_id, count(quoteaux.emperor_id)\n" +
+            "                 from romans_default_schema.emperor_quotes as quoteaux\n" +
+            "                 where quoteaux.emperor_id is not null\n" +
+            "                 group by quoteaux.emperor_id) as quotecounter)\n" +
+            ")\n" +
+            "  and emp.dtype = 'Emperor'", nativeQuery = true)
+    List<Emperor> mostQuotes();
+
+    @Query(value = "select *\n" +
+            "from romans_default_schema.person emp\n" +
+            "where emp.maximum_army_size <= (\n" +
+            "    select min(empaux.maximum_army_size)\n" +
+            "    from romans_default_schema.person empaux\n" +
+            ")", nativeQuery = true)
+    List<Emperor> smallestArmy();
+
+    @Query(value = "select *\n" +
+            "from romans_default_schema.person emp\n" +
+            "where emp.maximum_army_size >= (\n" +
+            "    select max(empaux.maximum_army_size)\n" +
+            "    from romans_default_schema.person empaux\n" +
+            ")", nativeQuery = true)
+    List<Emperor> biggestArmy();
 }
