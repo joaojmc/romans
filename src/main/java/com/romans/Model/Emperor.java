@@ -22,10 +22,6 @@ public class Emperor extends Person {
     // Military info
     private int maximumArmySize;
     private String mostNotableConflict;
-    @OneToMany
-    private List<Territory> territoryTaken;
-    @OneToMany
-    private List<Territory> territoryLost;
     // General info
     private String biography;
     @ElementCollection
@@ -44,8 +40,6 @@ public class Emperor extends Person {
                 ", mostNotableLaw='" + mostNotableLaw + '\'' +
                 ", maximumArmySize=" + maximumArmySize +
                 ", mostNotableConflict='" + mostNotableConflict + '\'' +
-                ", territoryTaken=" + territoryTaken +
-                ", territoryLost=" + territoryLost +
                 ", biography='" + biography + '\'' +
                 ", quotes=" + quotes +
                 '}';
@@ -64,15 +58,13 @@ public class Emperor extends Person {
                 Objects.equals(dateOfAbdication, emperor.dateOfAbdication) &&
                 Objects.equals(mostNotableLaw, emperor.mostNotableLaw) &&
                 Objects.equals(mostNotableConflict, emperor.mostNotableConflict) &&
-                Objects.equals(territoryTaken, emperor.territoryTaken) &&
-                Objects.equals(territoryLost, emperor.territoryLost) &&
                 Objects.equals(biography, emperor.biography) &&
                 Objects.equals(quotes, emperor.quotes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, successors, dateOfCrowning, dateOfAbdication, mostNotableLaw, maximumArmySize, mostNotableConflict, territoryTaken, territoryLost, biography, quotes);
+        return Objects.hash(super.hashCode(), id, successors, dateOfCrowning, dateOfAbdication, mostNotableLaw, maximumArmySize, mostNotableConflict, biography, quotes);
     }
 
     public String getId() {
@@ -129,22 +121,6 @@ public class Emperor extends Person {
 
     public void setMostNotableConflict(String mostNotableConflict) {
         this.mostNotableConflict = mostNotableConflict;
-    }
-
-    public List<Territory> getTerritoryTaken() {
-        return territoryTaken;
-    }
-
-    public void setTerritoryTaken(List<Territory> territoryTaken) {
-        this.territoryTaken = territoryTaken;
-    }
-
-    public List<Territory> getTerritoryLost() {
-        return territoryLost;
-    }
-
-    public void setTerritoryLost(List<Territory> territoryLost) {
-        this.territoryLost = territoryLost;
     }
 
     public String getBiography() {
