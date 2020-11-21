@@ -3,6 +3,7 @@ package com.romans.Model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -15,10 +16,12 @@ public class Person {
     // Personal info
     private String name;
     private Boolean adopted;
-    private String birthplace;
+    @OneToOne
+    private Territory birthplace;
     private LocalDate dateOfBirth;
     private String causeOfDeath;
-    private String placeOfDeath;
+    @OneToOne
+    private Territory placeOfDeath;
     private LocalDate dateOfDeath;
     @OneToMany
     private List<Person> wives;
@@ -31,27 +34,12 @@ public class Person {
     }
 
     @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", adopted=" + adopted +
-                ", birthplace='" + birthplace + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", causeOfDeath='" + causeOfDeath + '\'' +
-                ", placeOfDeath='" + placeOfDeath + '\'' +
-                ", dateOfDeath=" + dateOfDeath +
-                ", wives=" + wives +
-                ", children=" + children +
-                ", trustedPersons=" + trustedPersons +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return Objects.equals(name, person.name) &&
+        return id.equals(person.id) &&
+                name.equals(person.name) &&
                 Objects.equals(adopted, person.adopted) &&
                 Objects.equals(birthplace, person.birthplace) &&
                 Objects.equals(dateOfBirth, person.dateOfBirth) &&
@@ -65,15 +53,28 @@ public class Person {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, adopted, birthplace, dateOfBirth, causeOfDeath, placeOfDeath, dateOfDeath, wives, children, trustedPersons);
+        return Objects.hash(id, name, adopted, birthplace, dateOfBirth, causeOfDeath, placeOfDeath, dateOfDeath, wives, children, trustedPersons);
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", adopted=" + adopted +
+                ", birthplace=" + birthplace +
+                ", dateOfBirth=" + dateOfBirth +
+                ", causeOfDeath='" + causeOfDeath + '\'' +
+                ", placeOfDeath='" + placeOfDeath + '\'' +
+                ", dateOfDeath=" + dateOfDeath +
+                ", wives=" + wives +
+                ", children=" + children +
+                ", trustedPersons=" + trustedPersons +
+                '}';
     }
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -92,11 +93,11 @@ public class Person {
         this.adopted = adopted;
     }
 
-    public String getBirthplace() {
+    public Territory getBirthplace() {
         return birthplace;
     }
 
-    public void setBirthplace(String birthplace) {
+    public void setBirthplace(Territory birthplace) {
         this.birthplace = birthplace;
     }
 
@@ -116,11 +117,11 @@ public class Person {
         this.causeOfDeath = causeOfDeath;
     }
 
-    public String getPlaceOfDeath() {
+    public Territory getPlaceOfDeath() {
         return placeOfDeath;
     }
 
-    public void setPlaceOfDeath(String placeOfDeath) {
+    public void setPlaceOfDeath(Territory placeOfDeath) {
         this.placeOfDeath = placeOfDeath;
     }
 
